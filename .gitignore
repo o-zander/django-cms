@@ -8,6 +8,7 @@ cms/django
 *.DS_Store
 *.svn
 .*
+*.iml
 *.xml
 /*env*/
 *.sqlite
