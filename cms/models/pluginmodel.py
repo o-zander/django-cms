@@ -252,6 +252,9 @@ class CMSPlugin(with_metaclass(PluginModelBase, MPTTModel)):
         except KeyError:  # plugin type not found anymore
             return
 
+        if self.pk in parent_cache:
+            return parent_cache[self.pk]
+
         # set up some basic attributes on the new_plugin
         new_plugin = CMSPlugin()
         new_plugin.placeholder = target_placeholder
