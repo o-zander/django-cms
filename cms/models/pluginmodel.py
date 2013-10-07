@@ -265,10 +265,7 @@ class CMSPlugin(with_metaclass(PluginModelBase, MPTTModel)):
             try:
                 new_plugin.parent = parent_cache[self.parent_id]
             except KeyError:
-                from django.core.management import call_command
-                from django.http import Http404
-                call_command('cms', 'fix-mptt')
-                raise Http404
+                new_plugin.parent = self.parent.copy_plugin(target_placeholder, target_language, parent_cache)
 
         new_plugin.level = None
         new_plugin.language = target_language
