@@ -50,7 +50,7 @@ class PlaceholderAdmin(ModelAdmin):
             pat(r'add-plugin/$', self.add_plugin),
             pat(r'edit-plugin/([0-9]+)/$', self.edit_plugin),
             pat(r'delete-plugin/([0-9]+)/$', self.delete_plugin),
-            #pat(r'clear-placeholder/([0-9]+)/$', self.clear_placeholder),
+            pat(r'clear-placeholder/([0-9]+)/$', self.clear_placeholder),
             pat(r'move-plugin/$', self.move_plugin),
         )
         return url_patterns + super(PlaceholderAdmin, self).get_urls()
