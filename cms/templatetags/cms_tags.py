@@ -283,6 +283,13 @@ class Placeholder(Tag):
 register.tag(Placeholder)
 
 
+def page_has_change_permission(request):
+    page = getattr(request, 'current_page', None)
+    if page:
+        return page.get_draft_object().has_change_permission(request)
+    return True
+
+
 class RenderPlugin(InclusionTag):
     template = 'cms/content.html'
     name = 'render_plugin'
@@ -295,10 +302,7 @@ class RenderPlugin(InclusionTag):
         edit = False
         request = context['request']
         toolbar = getattr(request, 'toolbar', None)
-        page = request.current_page
-        if toolbar.edit_mode and (not page or page.has_change_permission(request)):
-            edit = True
-        if edit:
+        if toolbar.edit_mode and page_has_change_permission(request):
             from cms.middleware.toolbar import toolbar_plugin_processor
 
             processors = (toolbar_plugin_processor,)
