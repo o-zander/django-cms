@@ -257,7 +257,7 @@ class PageToolbar(CMSToolbar):
     def add_history_menu(self):
         # history menu
         history_menu = self.toolbar.get_or_create_menu('history', _('History'), position=2)
-        if 'reversion' in settings.INSTALLED_APPS:
+        if 'reversion' in settings.INSTALLED_APPS and False:
             import reversion
             from reversion.models import Revision
 
